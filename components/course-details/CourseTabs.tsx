@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useState } from "react";
+import { useId, useSyncExternalStore } from "react";
 import { pillClass } from "@/components/ui/pill";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { CourseDetails } from "@/data/courseDetails";
 
 const tabs = ["About", "Lessons", "Reviews"] as const;
@@ -44,23 +45,37 @@ function AboutPanel({ details }: { details: CourseDetails }) {
 }
 
 function LessonsPanel({ details }: { details: CourseDetails }) {
+  const { curriculum } = details;
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className={heading}>
-        {details.lessonCount} Lessons ({details.totalHours} hours)
-      </h2>
-      <ol className="flex flex-col gap-3">
-        {details.lessons.map((lesson, i) => (
-          <li key={lesson.title} className="flex justify-between gap-4 border-b border-shuttle-100 pb-3">
-            <span className="flex gap-2 font-medium leading-[1.2] text-shuttle-950">
-              <span className="w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-              {lesson.title}
+    <div className="flex max-w-[723px] flex-col gap-6">
+      <h2 className={heading}>Explore the Modules</h2>
+      <p className={body}>{curriculum.intro}</p>
+
+      <h2 className={heading}>Lesson List</h2>
+      <ul className="flex flex-col gap-6">
+        {curriculum.modules.map((module) => (
+          <li key={module.title} className="flex items-center gap-[13px]">
+            <span className="flex shrink-0 items-center justify-center rounded-3xl bg-lime p-4">
+              <Image src="/icons/videocam-dark.svg" alt="" width={40} height={40} />
             </span>
-            <span className="whitespace-nowrap leading-[1.6] text-primary">{lesson.duration}</span>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-base font-medium leading-[1.2] text-shuttle-950">{module.title}</h3>
+              <p className={body}>{module.summary}</p>
+            </div>
           </li>
         ))}
-      </ol>
-      <p className={body}>{details.moreVideoCount} more videos available after enrolling.</p>
+      </ul>
+
+      <h2 className={heading}>Lesson Content</h2>
+      <p className={body}>{curriculum.lessonContent}</p>
+
+      <h2 className={heading}>Lesson Progress Tracking</h2>
+      <p className={body}>{curriculum.progressIntro}</p>
+      <div className="flex flex-col gap-2 rounded-2xl border border-shuttle-200 bg-white p-4 backdrop-blur-[10px]">
+        <p className="text-sm font-medium leading-[1.2] text-shuttle-950">Learning Progress</p>
+        <p className="text-heading-s text-shuttle-950">{curriculum.progress}%</p>
+        <ProgressBar percent={curriculum.progress} trackClassName="bg-shuttle-100" className="w-full" />
+      </div>
     </div>
   );
 }
@@ -78,8 +93,26 @@ function ReviewsPanel({ details }: { details: CourseDetails }) {
   );
 }
 
+/* The active tab lives in the URL hash (#about, #lessons, #reviews) so each view can be linked to. */
+function subscribe(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+
+function tabFromHash(hash: string): Tab {
+  return tabs.find((tab) => `#${tab.toLowerCase()}` === hash) ?? "About";
+}
+
 export function CourseTabs({ details }: { details: CourseDetails }) {
-  const [active, setActive] = useState<Tab>("About");
+  const active = useSyncExternalStore(
+    subscribe,
+    () => tabFromHash(window.location.hash),
+    () => "About" as Tab,
+  );
+  const setActive = (tab: Tab) => {
+    window.history.pushState(null, "", `#${tab.toLowerCase()}`);
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  };
   const id = useId();
 
   return (
