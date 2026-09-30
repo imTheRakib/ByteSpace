@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { pillClass } from "./pill";
 
 type TopicFilterProps = {
   rows: string[][];
@@ -31,9 +32,7 @@ export function TopicFilter({ rows, moreHref, layout = "centered" }: TopicFilter
                 type="button"
                 aria-pressed={selected}
                 onClick={() => setActive(topic)}
-                className={`whitespace-nowrap rounded-3xl px-4 py-3 text-base font-medium leading-[1.2] transition-colors ${
-                  selected ? "bg-lime text-shuttle-950" : "bg-shuttle-50 text-shuttle-700 hover:bg-shuttle-100"
-                }`}
+                className={pillClass(selected)}
               >
                 {topic}
               </button>
