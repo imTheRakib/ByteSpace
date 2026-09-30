@@ -5,6 +5,7 @@ import { useId, useSyncExternalStore } from "react";
 import { pillClass } from "@/components/ui/pill";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { CourseDetails } from "@/data/courseDetails";
+import { ReviewsPanel } from "./ReviewsPanel";
 
 const tabs = ["About", "Lessons", "Reviews"] as const;
 type Tab = (typeof tabs)[number];
@@ -76,19 +77,6 @@ function LessonsPanel({ details }: { details: CourseDetails }) {
         <p className="text-heading-s text-shuttle-950">{curriculum.progress}%</p>
         <ProgressBar percent={curriculum.progress} trackClassName="bg-shuttle-100" className="w-full" />
       </div>
-    </div>
-  );
-}
-
-function ReviewsPanel({ details }: { details: CourseDetails }) {
-  return (
-    <div className="flex flex-col gap-6">
-      <h2 className={heading}>Reviews</h2>
-      <p className="flex items-center gap-2">
-        <Image src="/icons/star-rating.svg" alt="" width={24} height={24} />
-        <span className="text-heading-xs text-shuttle-950">{details.rating}</span>
-        <span className={body}>average from {details.reviews} reviews</span>
-      </p>
     </div>
   );
 }
