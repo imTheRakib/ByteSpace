@@ -22,7 +22,7 @@ export function Header({ tone = "dark", className = "relative" }: HeaderProps) {
   const text = tone === "light" ? "text-shuttle-50" : "text-shuttle-950";
 
   return (
-    <header className={`z-10 h-[120px] ${className}`}>
+    <header className={`z-10 h-30 ${className}`}>
       <div className="relative mx-auto h-full w-full max-w-[1232px] px-4">
         <Logo tone={tone} className="absolute left-[18px] top-[35px]" />
 
