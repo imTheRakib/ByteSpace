@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
+import { creatorHref } from "@/data/creators";
 import { Header } from "@/components/layout/Header";
 import { DesignCanvas } from "@/components/ui/Container";
 import type { CourseDetails } from "@/data/courseDetails";
@@ -42,7 +44,10 @@ export function CourseHero({ details, creator }: CourseHeroProps) {
               <p className="text-heading-xs">{details.subtitle}</p>
             </div>
             <p className="text-lg font-medium leading-[1.2] text-primary-50">
-              by <span className="text-lime">{creator}</span>
+              by{" "}
+              <Link href={creatorHref(creator)} className="text-lime hover:underline">
+                {creator}
+              </Link>
             </p>
             <ul className="flex flex-wrap gap-4">
               <MetaPill icon="/icons/level-blue.svg">{details.level}</MetaPill>
