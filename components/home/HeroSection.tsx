@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/Button";
 import { DesignCanvas } from "@/components/ui/Container";
 import { Ornament, type OrnamentProps } from "@/components/ui/Ornament";
+import { SearchInput } from "@/components/ui/SearchInput";
 import { happyStudentAvatars } from "@/data/home";
 
 const ornaments: OrnamentProps[] = [
@@ -48,16 +49,7 @@ export function HeroSection() {
         </div>
 
         <form action="/courses" role="search" className="flex w-full max-w-[581px] flex-wrap items-start justify-center gap-4">
-          <label className="flex h-[52px] min-w-0 flex-1 basis-[280px] items-center gap-2 rounded-3xl bg-white px-6 py-3 md:max-w-[461px]">
-            <Image src="/icons/search.svg" alt="" width={24} height={24} />
-            <span className="sr-only">Search courses</span>
-            <input
-              type="search"
-              name="q"
-              placeholder="Course, topic, creator"
-              className="w-full bg-transparent text-lg leading-[1.6] text-shuttle-950 outline-none placeholder:text-shuttle-400"
-            />
-          </label>
+          <SearchInput placeholder="Course, topic, creator" className="flex-1 basis-[280px] md:max-w-[461px]" />
           <Button type="submit">Search</Button>
         </form>
       </div>
