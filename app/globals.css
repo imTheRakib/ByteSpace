@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+@theme {
+  /* Persian Blue */
+  --color-primary: #003be2;
+
+  /* Electric Lime */
+  --color-lime: #d4fb20;
+  --color-lime-strong: #cbfc01;
+
+  /* Shuttle Gray */
+  --color-shuttle-50: #f5f5f6;
+  --color-shuttle-100: #e5e6e8;
+  --color-shuttle-200: #ced0d3;
+  --color-shuttle-400: #82868e;
+  --color-shuttle-700: #4b4c53;
+  --color-shuttle-950: #242528;
+
+  /* Neutrals */
+  --color-ink: #040819;
+  --color-graphite: #4f4f4f; /* Black/700 */
+  --color-black-400: #888888;
+  --color-black-200: #d1d1d1;
+  --color-surface: #fafafa;
+  --color-track: #f6f6f6;
+  --color-thumb: #443131;
+}
+
+@theme inline {
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-logo: var(--font-clash-display), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Typography — named after the Figma text styles */
+@utility text-heading-l {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@utility text-heading-m {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@utility text-heading-s {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@utility text-heading-xs {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Effect "A" — follows the alpha of cut-out images */
+@utility drop-shadow-float {
+  filter: drop-shadow(0.518px 0.741px 3.036px rgba(0, 0, 0, 0.04))
+    drop-shadow(2.233px 3.19px 5.723px rgba(0, 0, 0, 0.06))
+    drop-shadow(5.383px 7.69px 9.571px rgba(0, 0, 0, 0.07))
+    drop-shadow(10.208px 14.582px 16.087px rgba(0, 0, 0, 0.08))
+    drop-shadow(16.946px 24.209px 24px rgba(0, 0, 0, 0.09))
+    drop-shadow(25.838px 36.912px 36px rgba(0, 0, 0, 0.1))
+    drop-shadow(37.122px 53.032px 56px rgba(0, 0, 0, 0.11))
+    drop-shadow(51.038px 72.912px 72px rgba(0, 0, 0, 0.13));
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-shuttle-950);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
