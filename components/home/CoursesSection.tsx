@@ -3,7 +3,7 @@ import { CourseCard } from "@/components/cards/CourseCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { categories, featuredCourses, topicRows } from "@/data/home";
-import { TopicFilter } from "./TopicFilter";
+import { TopicFilter } from "@/components/ui/TopicFilter";
 
 export function CoursesSection() {
   return (
@@ -15,7 +15,7 @@ export function CoursesSection() {
         />
 
         <div className="mt-[42px]">
-          <TopicFilter rows={topicRows} />
+          <TopicFilter rows={topicRows} moreHref="/courses" />
         </div>
 
         <div className="mt-[77px] grid justify-items-center gap-10 md:grid-cols-2 lg:grid-cols-3">
