@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Course } from "@/components/cards/CourseCard";
 import { Button } from "@/components/ui/Button";
 import type { CourseDetails } from "@/data/courseDetails";
+import { creatorHref } from "@/data/creators";
 
 type CourseSidebarProps = {
   course: Course;
@@ -71,7 +72,7 @@ export function CourseSidebar({ course, details }: CourseSidebarProps) {
         </div>
         <p className={body}>{details.creator.bio}</p>
         <Link
-          href="/creators"
+          href={creatorHref(details.creator.name)}
           className="rounded-3xl border border-shuttle-200 px-4 py-2 text-base font-medium leading-[1.2] text-shuttle-700 transition-colors hover:border-primary"
         >
           See Full Profile
